@@ -61,6 +61,7 @@ public class BinarySearch_test1 {
 		System.out.println("開始Binary search");
 		System.out.println(Arrays.binarySearch(array, 9));
 		
+		System.out.println("test");
 
 	}
 
