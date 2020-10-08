@@ -31,6 +31,8 @@ public class ArraySort {
 		for(String s: cutLisa) {
 			System.out.print(s + " ");
 		}
+		
+		
 		System.out.println();
 		Arrays.sort(cutenglish, Collections.reverseOrder());
 		for(String s: cutenglish) {
