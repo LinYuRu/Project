@@ -29,6 +29,7 @@ class DivideAndConquer {
 	}
 
 	static public int Search(int[] array, int num, int left, int right) {
+		int count = 0;
 		if (left > right) {
 			return -1;
 		}
@@ -59,26 +60,35 @@ public class BinarySearch_test1 {
 		}
 		System.out.println();
 		System.out.println("開始Binary search");
-		System.out.println(Arrays.binarySearch(array, 9));
-		
-		System.out.println("test");
+//		System.out.println(Arrays.binarySearch(array, 9));
+		System.out.println("結果: "+binarySerchForSortedArray(array, 1,8,7));
 
 	}
 
-	private static int binarySerchForSortedArray(int[] sortedArray, int  target, int start, int end) {
-	    if (start < 0 || end >= sortedArray.length) {
-	        return -1;
-	    }
-	    while (start <= end) {
-	        int mid = (start + end) / 2;
-	        if (sortedArray[mid] == target) {
-	            return mid;
-	        } else if (target > sortedArray[mid]) {
-	            start = mid + 1;
-	        } else if (target < sortedArray[mid]) {
-	            end = mid - 1;
-	        }
-	    }
-	    return -1;
+	private static int binarySerchForSortedArray(int[] a, int fromIndex, int toIndex,
+            int key) {
+		int count = 0;
+		int low = fromIndex;
+        int high = toIndex - 1;
+
+        while (low <= high) {
+        	count++;
+            int mid = (low + high) >>> 1;
+            int midVal = a[mid];
+
+            if (midVal < key)
+                low = mid + 1;
+            else if (midVal > key) {
+                high = mid - 1;
+            	
+            }
+            else {
+        	    System.out.println("排序次數: " + count);
+                return mid; // key found            	
+            }
+        }
+
+	    System.out.println("排序次數: " + count);
+        return -(low + 1);  // key not found.
 	}
 }
