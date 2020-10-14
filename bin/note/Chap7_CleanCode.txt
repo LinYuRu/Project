@@ -1,0 +1,220 @@
+1.使用例外事件，而非回傳錯誤碼
+2.*從呼叫者的角度定義例外類別
+3.*定義正常的程式流程
+4.**不要回傳(null)空值
+5.不要傳遞 null
+
+5.Error case:
+public class MetricsCalculator{
+	public double xProjection(Point p1, Point p2){
+		return (p2.x - p1.x) * 1.5;
+	}
+	...
+}
+會發生 NullPointerException ->
+calculator.xProjection(null, new Point(12,13));
+
+5.other way:
+這個方法比較好一點，但是要替 InvalidArgumentException 定義一個處理程式(handler)
+public class MetricsCalculator{
+	public double xProjection(Point p1, Point p2){
+	if(p1 == null||p2 == null){
+	throw InvalidArgumentException(
+		*Invalid argument for MetricsCalculator.xProjecttion*);
+	}
+		return (p2.x - p1.x) * 1.5;
+	}
+	...
+}
+
+5.propper case:
+用一組邏輯判斷(Assertion)如下:
+public class MetricsCalculator{
+	public double xProjection(Point p1, Point p2){
+		asseer p1 != null : "p1 should not be null";
+		asseer p2 != null : "p2 should not be null";
+		return (p2.x - p1.x) * 1.5;
+	}
+}
+
+4.Error case:
+給呼叫者找麻煩，因為只要忘記檢查null，程式就會混亂錯誤
+例如說下例的第二行，peristentStore並沒有檢查是否為null
+這裡沒有檢查，我們可能會遇到NullPointException(也可能不會)
+也許有人在程式頂層捕捉了這個例外
+問題是出在沒有做 null 的檢查嗎?
+其實不然，問題在於做了太多的檢查
+public void registerItem(Item item){
+	if(item != null){
+	ItemRegistry registry = peristentStore.getItemRegistry();
+		if(registry != null){
+			Item existing = registry.getItem(item.getID());
+			if(existing.getBillingPeriod().hasRetailOwner()){
+			existing.register(item);
+			}
+		}
+	}
+}
+
+console:
+依上例的邏輯，是要讓方法回傳 null?
+與其回傳 null ，不如拋出例外事件，或者回傳一個 specail case(特殊情況物件)
+大部分情況下，特殊情況物件可以做簡單的補救，如下例
+
+List<Employee> employee = getEmployees();
+if(employees != null){
+	for(Emplyee e: employees){
+		totalPay += e.getPay();
+	}
+}
+
+現在 employee 可以回傳 null，但是我們可以修改getEmployees()
+讓他能夠回傳一個空白串列(empty list)，這樣我們就不需要這個判斷
+List<Employee> employee = getEmployees();
+	for(Employee e : employees){
+		totalPay += e.getPay();
+	}
+
+public List<Employee> getEmployees(){
+	if(..there are no employee..){
+		return Collections.emptyList();
+	}
+}
+
+** 這邊要注意 emptyList() 是一個不可變串列 (immutable list)
+
+
+3.Error case:
+商業邏輯:
+如果肉類消費了，肉類會加總在總消費中。
+如果該是未修費肉類，員工可以得到一日的伙食補貼。
+但是這個例外搞亂了邏輯，我們希望可以不要處理例外狀況。
+try{
+	MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
+	m_total += expenses.getTotal();
+} catch(MealExpensesNotFound e){
+	m_total += getMealPerDiem();
+}
+
+3.propper case:
+不需要處理例外狀況，可以簡單的多
+MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
+m_total +=expenses.getTotal();
+
+下面的例子稱為 Special Case Pattern[fowler](特殊狀況模式)
+**修改 ExpenseReportDAO ，回傳肉類消費物件，如果未消費肉類，就回傳伙食補貼物件。**
+如此一來，客戶端就不用處理例外行為，因為例外行為包裹在特殊物件裡。
+public class PerDiemMealExpenses implements MealExpense{
+	public int getTotal(){
+	//return the per diem default
+	}
+}
+
+
+
+
+2.Error case:
+太多重複的程式碼(都在CLIENT端)
+ACMEPort port = new ACMEPort(12);
+try{
+	port.open();
+} catch (DeviceResponseException e){
+	reportPortError(e);
+	logger.log("Device response exception", e);
+} catch (ATM1212UnlockedException e){
+	reportPortError(e);
+	logger.log("Unlock exception", e);
+} catch (GMXError e){
+	reportPortError(e);
+	logger.log("Device response exception");
+} finally{
+	...
+}
+
+
+2. propper case:
+包裹(wrap)呼叫的API，就能回傳共用的例外型態
+LocalPort port = new LocalPort(12);
+try{
+	port.open();
+	} catch(PortDeviceFailure e){
+	reportError(e);
+	logger.log(e.getMessage(), e);
+	} finally {
+	...
+	}
+
+LocalPort是簡單的包裹類別，捕捉和翻譯從acmepORT所拋出的例外事件
+public class LocalPort{
+	private ACMEPort innerPort;
+	
+	public LocalPort(int portNumber){
+		innerPort = new ACMEPort(portNumber);
+	}
+	
+	public void open(){
+		try{
+		innerPort.open();
+		} catch (DeviceResponseException e){
+			throw new PortDeviceFailure(e);
+		} catch (ATM1212Unlocked e){
+		throw new PortDeviceFailure(e);
+		} catch (GMXError e){
+		throw new PortDeviceFailure(e);
+		}
+	}
+	...
+}
+
+
+
+
+1. Error ex:
+public class DeviceController{
+	DeviceHandle handle = getHandle(DEV1);
+	if(handle!=DeviceHandle.INVALID){
+		retriveDeviceRecord(handle);
+		if(record.getStatus() != DEVICE_SUSPENDED){
+		pauseDevice(handle);
+		clearDeviceWorkQueue(handle);
+		closeDevice(handle);
+		}else {
+		logger.log("Device suspended. Unable to shut down");
+		}
+	} else {
+		logger.log("Invalid handle for: " + DEV1.toString());
+	}
+	...
+}
+
+1.	propper case:
+public class DeviceController{
+	...
+	
+	public void sendShutDown(){
+		try{
+		tryToShutDown();
+		} catch(DeviceShutDownError e){
+			logger.log(e);
+		}	
+	}
+	
+	private void tryToShutDown() throws DeviceShutDownError{
+		DeviceHandle handle = getHandle(DEV1);
+		DeviceRecord record = retriveDeviceRecord(handle);
+		pauseDevice(handle);
+		
+		clearDeviceWorkQueue(handle);
+		closeDevice(handle);
+	}
+	
+	private DeviceHandle getHandle(DeviceID id){
+	...
+	throw new DeviceShutDownError("Invalid handle for: " + id.toString());
+	}
+	...
+	
+}
+	
+	
+	

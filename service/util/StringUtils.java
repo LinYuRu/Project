@@ -1,4 +1,4 @@
-package StringUtils;
+package service.util;
 
 public class StringUtils {
 
