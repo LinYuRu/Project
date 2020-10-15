@@ -1,0 +1,14 @@
+--臨時證年度
+select count(distinct( concat(P.reg, '-', P.dmv)))
+from pcs P
+JOIN car C on P.reg = C.reg and P.dmv = C.dmv
+where C.kind_no='MA1' and effective_date>'' and effective_date<'';
+
+
+--concat  mybatis
+select count( distinct( concat( concat(P.reg, '-'), P.dmv))) 
+from pcs P
+JOIN car C on P.reg = C.reg and P.dmv = C.dmv
+where C.kind_no='MA1';
+
+--concat  Oracle: ||   MsSQL: +

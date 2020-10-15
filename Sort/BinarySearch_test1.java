@@ -61,7 +61,7 @@ public class BinarySearch_test1 {
 		System.out.println();
 		System.out.println("開始Binary search");
 //		System.out.println(Arrays.binarySearch(array, 9));
-		System.out.println("結果: "+binarySerchForSortedArray(array, 1,8,7));
+		System.out.println("結果: "+binarySerchForSortedArray(array, 1,7,4));
 
 	}
 
