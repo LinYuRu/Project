@@ -1,5 +1,7 @@
 package service.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class DateUtils {
 
 	/**
@@ -24,7 +26,7 @@ public class DateUtils {
 		final int temp7 = 7;
 		final int temp8 = 8;
 
-		if ((date == null) || (date.length() == 0)) {
+		if (StringUtils.isBlank(date)) {
 			return "";
 		}
 		String str = "";

@@ -11,11 +11,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/common-lang3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/log4j-1.2.17.jar">
 		<attributes>
 			<attribute name="module" value="true"/>

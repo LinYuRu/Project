@@ -1,6 +1,6 @@
 package service.util;
 
-public class StringUtils {
+public class StringUtility {
 
 	public boolean isExist(CharSequence input) {
 		if (org.apache.commons.lang3.StringUtils.isEmpty(input)
