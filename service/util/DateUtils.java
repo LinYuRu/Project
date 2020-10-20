@@ -1,6 +1,6 @@
 package service.util;
 
-public class DateUtiity {
+public class DateUtils {
 
 	/**
 	 * 格式化西元/民國日期字串

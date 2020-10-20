@@ -11,7 +11,30 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/JDBC_Sqlserver/lib/common-lang3.jar"/>
-	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/common-lang3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/log4j-1.2.17.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/ojdbc14-1.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/mssql-jdbc-7.2.2.jre11.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/JavaFrameworkJava11/openjdk11/external_jar/org.slf4j.api-1.7.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
