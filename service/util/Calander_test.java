@@ -1,24 +1,34 @@
 package service.util;
 
+import java.util.Calendar;
+
 public class Calander_test {
-
 	public static void main(String[] args) {
-		long startTime, endTime = 0;
-		int sum = 0;
-		startTime = System.currentTimeMillis();
-			for (int i = 0; i < 50000; i++) {
-				for (int j = 0; j < 50000; j++) {
-					sum = i * j;
-					if (sum > 2000000000) {
-						endTime = System.currentTimeMillis();
-						break;
-					}
-				}
-			}
-		System.out.println("startTime: " + startTime);
-		System.out.println("endTime: " + endTime);
-		System.out.printf("花了 %d 毫秒", (endTime - startTime));
-
+	Calendar birth = Calendar.getInstance();
+	birth.set(1996, Calendar.MAY, 26);
+	Calendar now = Calendar.getInstance();
+	System.out.printf("歲數: %d%n", yearsBetween(birth, now));
+//	System.out.printf("天數: %d%n", daysBetween(birth, now));
 	}
-
+	
+	public static long yearsBetween(Calendar begindate, Calendar enddate) {
+		Calendar calendar = (Calendar) begindate.clone();
+		long years = 0;
+		while (calendar.before(enddate)) {
+			calendar.add(Calendar.YEAR, 1);
+			years++;
+		}
+		return years -1;
+	}
+	
+	public static long daysBetween(Calendar begindate, Calendar enddate) {
+		Calendar calendar = (Calendar) begindate.clone();
+		long days = 0;
+		while (calendar.before(enddate)) {
+			calendar.add(Calendar.DATE, 1);
+			days++;
+		}
+		return days -1;
+	}
+	
 }

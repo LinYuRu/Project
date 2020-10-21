@@ -6,17 +6,16 @@ public class DateUtils {
 
 	/**
 	 * 格式化西元/民國日期字串
+	 * 
 	 * @param date: 日期字串
 	 * 
 	 * @param separate: 分隔字元
 	 * 
-	 * @return 已格式化的日期字串
-	 * ex: formatDate("20130101","/") return "2013/01/01"
-	 *     formatDate("1020101","/") return "102/01/01"
-	   *     傳入空的分隔字元可用來移除已存在的任何分隔符號
-	 *     "20130101" formatDate("102-01-01","") return "1020101"
+	 * @return 已格式化的日期字串 ex: formatDate("20130101","/") return "2013/01/01"
+	 *         formatDate("1020101","/") return "102/01/01" 傳入空的分隔字元可用來移除已存在的任何分隔符號
+	 *         "20130101" formatDate("102-01-01","") return "1020101"
 	 * 
-	 * **/
+	 **/
 	public static String formatDate(String date, String separate) {
 		final int temp0 = 0;
 		final int temp3 = 3;

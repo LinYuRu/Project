@@ -4,7 +4,8 @@ import java.sql.*;
 public class QueryDemo1 {
 
 	public static void main(String[] args) throws ClassNotFoundException {
-		String connUrl = "jdbc:sqlserver://localhost:1433;databaseName=jdbc";
+		String connUrl = "jdbc:sqlserver://localhost:60001;databaseName=xe";
+//		String connUrl = "jdbc:sqlserver://localhost:1433;databaseName=jdbc";
 		try { Connection conn = DriverManager.getConnection(connUrl, "sa", "passw0rd");		
 			
 			String qryStmt = "SELECT ename, salary FROM employee";
