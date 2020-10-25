@@ -1,4 +1,4 @@
-package service.util;
+package service_prac;
 
 public class Period_prac {
 	public static void main(String[] args) { // example.1
@@ -14,9 +14,11 @@ public class Period_prac {
 				}
 			}
 		}
-		System.out.println("startTime: " + startTime);
-		System.out.println("endTime: " + endTime);
-		System.out.printf("花了 %d 毫秒", (endTime - startTime));
+//		System.out.println("startTime: " + startTime);
+//		System.out.println("endTime: " + endTime);
+//		System.out.printf("花了 %d 毫秒", (endTime - startTime));
 
+		double a = 1;
+		System.out.println(a);
 	}
 }
