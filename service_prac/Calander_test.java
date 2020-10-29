@@ -2,15 +2,19 @@ package service_prac;
 
 import java.util.Calendar;
 
+import service.util.DateUtils;
+
 public class Calander_test {
 	public static void main(String[] args) {
-	Calendar birth = Calendar.getInstance();
-	birth.set(1996, Calendar.MAY, 26);
-	Calendar now = Calendar.getInstance();
-	System.out.printf("歲數: %d%n", yearsBetween(birth, now));
+//	Calendar birth = Calendar.getInstance();
+//	birth.set(1996, Calendar.MAY, 26);
+//	Calendar now = Calendar.getInstance();
+//	System.out.printf("歲數: %d%n", yearsBetween(birth, now));
 //	System.out.printf("天數: %d%n", daysBetween(birth, now));
+
+		System.out.println("今天是幾號: " + DateUtils.getNow());
 	}
-	
+
 	public static long yearsBetween(Calendar begindate, Calendar enddate) {
 		Calendar calendar = (Calendar) begindate.clone();
 		long years = 0;
@@ -18,9 +22,9 @@ public class Calander_test {
 			calendar.add(Calendar.YEAR, 1);
 			years++;
 		}
-		return years -1;
+		return years - 1;
 	}
-	
+
 	public static long daysBetween(Calendar begindate, Calendar enddate) {
 		Calendar calendar = (Calendar) begindate.clone();
 		long days = 0;
@@ -28,7 +32,7 @@ public class Calander_test {
 			calendar.add(Calendar.DATE, 1);
 			days++;
 		}
-		return days -1;
+		return days - 1;
 	}
-	
+
 }

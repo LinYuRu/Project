@@ -1,8 +1,17 @@
 package service.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class DateUtils {
+	
+	public static Integer getNow() {
+		String format = new SimpleDateFormat("dd").format(new Date());
+		Integer days = Integer.valueOf(format);
+		return days;
+	}
 
 	/**
 	 * 格式化西元/民國日期字串

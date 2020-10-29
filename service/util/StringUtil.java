@@ -72,12 +72,13 @@ public class StringUtil {
 		try {
 			int minute = Integer.parseInt(minuteStr);
 			if (minute < Min_Minute || minute > Max_Minute) {
-				throw new RuntimeException();
-//					new StringBuffer("分鐘必須>=").append(Min_Minute).append(", <=").append(Max_Minute).toString());
+//				throw new RuntimeException();
+				throw new RuntimeException(new StringBuffer("分鐘必須>=").append(Min_Minute).append(", <=").append(Max_Minute).append(".").toString());
 			}
 			return minute;
 		} catch (Exception e) {
-			throw new RuntimeException("分鐘必須為整數, 且 >=0, <=59.");
+			e.printStackTrace();
+			throw new RuntimeException();
 		} 
 	}
 
