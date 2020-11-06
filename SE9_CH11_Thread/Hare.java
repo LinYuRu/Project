@@ -1,4 +1,4 @@
-package SE9_CH11;
+package SE9_CH11_Thread;
 
 public class Hare  extends Thread  {
 	private boolean[] flags = { true, false };

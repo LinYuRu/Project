@@ -1,4 +1,4 @@
-package SE9_CH17;
+package SE9_CH17_Reflection;
 
 public class ClassIno {
 	public static void main(String[]args) {

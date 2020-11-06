@@ -1,4 +1,4 @@
-package SE9_CH11;
+package SE9_CH11_Thread;
 
 public class TortoiseHareRace2 {
 
