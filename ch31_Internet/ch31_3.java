@@ -15,6 +15,7 @@ public class ch31_3 {
 			System.out.println("host 是: " + url.getHost());
 			System.out.println("Path 是: " + url.getPath());
 			System.out.println("Port 是: " + url.getPort());
+			System.out.println("UserInfo: " + url.getUserInfo());
 			System.out.println("DefaultPort 是: " + url.getDefaultPort());
  		} catch (MalformedURLException e) {
 			System.out.println(e);

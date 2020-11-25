@@ -1,12 +1,32 @@
 package service.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class DateUtils {
-	
+
+	public static boolean isBusinessDay() {
+		boolean isBusinessDay = true;
+		int iToday = 0;
+		Calendar calendar = Calendar.getInstance();
+		iToday = calendar.get(7);
+		if ((iToday == 1) || (iToday == 7)) {
+			isBusinessDay = false;
+		}
+		return isBusinessDay;
+	}
+
+	public static String getToday() {
+		Calendar calendar = Calendar.getInstance();
+		int tYear = calendar.get(1);
+		int tMonth = calendar.get(2) + 1;
+		int tDate = calendar.get(5);
+		return String.valueOf(tYear * 10000 + tMonth * 100 + tDate);
+	}
+
 	public static Integer getNow() {
 		String format = new SimpleDateFormat("dd").format(new Date());
 		Integer days = Integer.valueOf(format);
